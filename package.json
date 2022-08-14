@@ -1,0 +1,36 @@
+{
+  "name": "provi",
+  "version": "0.0.0",
+  "description": "Minimalistic and cute Service Provider",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "unsubscriber": "0.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/re-js/provi.git"
+  },
+  "keywords": [
+    "service",
+    "service provider",
+    "service allocator",
+    "minimalistic",
+    "typescript"
+  ],
+  "author": "Slava Bereza <mail@betula.co> (http://betula.co)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/re-js/provi/issues"
+  },
+  "homepage": "https://github.com/re-js/provi#readme",
+  "devDependencies": {
+    "@types/jest": "28.1.6",
+    "jest": "28.1.3",
+    "ts-jest": "28.0.7",
+    "typescript": "4.7.4"
+  }
+}
