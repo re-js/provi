@@ -19,7 +19,11 @@
     "service provider",
     "service allocator",
     "minimalistic",
-    "typescript"
+    "typescript",
+    "di",
+    "dependency injection",
+    "IoC",
+    "inversion of control"
   ],
   "author": "Slava Bereza <mail@betula.co> (http://betula.co)",
   "license": "MIT",

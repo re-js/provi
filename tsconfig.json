@@ -2,6 +2,12 @@
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "provi": ["."],
+      "provi/client": ["client"],
+      "provi/server": ["server"],
+    },
   },
   "exclude": ["node_modules"]
 }

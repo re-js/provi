@@ -1,7 +1,12 @@
 type Constructor<T = any> = (() => T) | (new () => T);
 
-export declare const provide: <T>(Constructor: Constructor<T>) => T;
-export declare const destroy: {
+type Provide = <T>(Constructor: Constructor<T>) => T;
+type Destroy = {
   (...Constructors: Constructor[]): void;
   (): void
 };
+
+export declare const factory: () => {
+  provide: Provide
+  destroy: Destroy
+}
