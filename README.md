@@ -40,7 +40,7 @@ export class App {
 browser or native usage
 
 ```javascript
-import { provide } from "provi/clent"
+import { provide } from "provi/client"
 
 // Define dependencies using "provide" function
 export class Auth {
