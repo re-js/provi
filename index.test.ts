@@ -91,3 +91,8 @@ test('server instance', () => {
   expect(server.provide(Service)).toStrictEqual([1])
   expect(Service).toBeCalledTimes(2)
 })
+
+test('destroy the never existed instance', () => {
+  const A = () => {}
+  destroy(A)
+})
