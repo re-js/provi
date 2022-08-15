@@ -25,12 +25,10 @@ node.js or bun usage
 import { provide } from "provi/server"
 
 class Db { /* ... */ }
-class Server { /* ... */ }
 
 // Define dependencies using "provide" function
 export class App {
   db = provide(Db)
-  server = provide(Server)
   // ...
   start() {
     this.db.init()
