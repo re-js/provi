@@ -1,4 +1,4 @@
-// import { attach } from 'unsubscriber'
+import { un } from 'unsubscriber'
 import { factory } from 'provi'
 import * as client from 'provi/client'
 import * as server from 'provi/server'
@@ -95,4 +95,15 @@ test('server instance', () => {
 test('destroy the never existed instance', () => {
   const A = () => {}
   destroy(A)
+})
+
+test('destroy with unsubscriber', () => {
+  const spy = jest.fn()
+  const A = () => {
+    un(spy)
+  }
+  provide(A)
+  expect(spy).toBeCalledTimes(0)
+  destroy()
+  expect(spy).toBeCalledTimes(1)
 })
