@@ -24,7 +24,7 @@ jobs:
       - run: node --version
       - run: npm --version
       - run: npm i
-      - run: npm run test -- --coverage
+      - run: npm test -- --coverage
       - uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
