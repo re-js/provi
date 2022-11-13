@@ -9,14 +9,23 @@ const
         let h = services.get(ctor)
         if (!h) {
           const unsubs = unsubscriber()
-          h = [
-            collect(unsubs, () => (
-              ctor.prototype === void 0
-                ? ctor()
-                : new ctor()
-            )),
-            unsubs
-          ]
+          try {
+            h = [
+              collect(unsubs, () => (
+                ctor.prototype === void 0
+                  ? ctor()
+                  : new ctor()
+              )),
+              unsubs
+            ]
+          } catch (e) {
+            if (e.message === 'Maximum call stack size exceeded') {
+              console.error(e);
+              throw new Error('Circullar dependency detection');
+            } else {
+              throw e;
+            }
+          }
           services.set(ctor, h)
         }
         return h[0]

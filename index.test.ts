@@ -107,3 +107,14 @@ test('destroy with unsubscriber', () => {
   destroy()
   expect(spy).toBeCalledTimes(1)
 })
+
+test('cycle', () => {
+
+  const A: any = () => provide(B);
+  const B = () => provide(A);
+
+  expect(() => {
+    provide(B);
+  }).toThrowError('Circullar dependency detection');
+
+})
