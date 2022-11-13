@@ -3,10 +3,10 @@ import { factory } from 'provi'
 import * as client from 'provi/client'
 import * as server from 'provi/server'
 
-const { provide, destroy } = factory();
+const { provide, destroy, isolate } = factory() as any
 
 test('function service', () => {
-  let c = 0;
+  let c = 0
   let Service = () => ++c
 
   expect(c).toBe(0)
@@ -16,7 +16,7 @@ test('function service', () => {
 })
 
 test('class service', () => {
-  let c = 0;
+  let c = 0
   class Service {
     c: number
     constructor() {
@@ -110,11 +110,54 @@ test('destroy with unsubscriber', () => {
 
 test('cycle', () => {
 
-  const A: any = () => provide(B);
-  const B = () => provide(A);
+  const A: any = () => provide(B)
+  const B = () => provide(A)
 
   expect(() => {
-    provide(B);
-  }).toThrowError('Circullar dependency detection');
+    provide(B)
+  }).toThrowError('Circullar dependency detection')
+
+})
+
+test('isolate', async () => {
+  const un_spy = [jest.fn(), jest.fn(), jest.fn()]
+
+  let curr_index = 0
+  const A = () => {
+    const i = curr_index++
+    un(() => un_spy[i]())
+    return i
+  }
+
+  run_context(0)
+  run_context(1)
+  run_context(2)
+
+  await new Promise(r => setTimeout(r, 350))
+
+  expect(un_spy[0]).toBeCalled()
+  expect(un_spy[1]).toBeCalled()
+  expect(un_spy[2]).toBeCalled()
+
+
+  async function run_context(i: number) {
+    await isolate(async () => {
+      expect(provide(A)).toBe(i)
+
+      await new Promise(r => {
+        expect(provide(A)).toBe(i)
+
+        setTimeout(() => {
+          expect(provide(A)).toBe(i)
+          r(1)
+        }, Math.floor(Math.random() * 100))
+      })
+      expect(provide(A)).toBe(i)
+
+      expect(un_spy[i]).not.toBeCalled()
+    })
+
+    expect(un_spy[i]).toBeCalled()
+  }
 
 })

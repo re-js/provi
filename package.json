@@ -23,7 +23,10 @@
     "di",
     "dependency injection",
     "IoC",
-    "inversion of control"
+    "inversion of control",
+    "isolate",
+    "SSR",
+    "Server Side Rendering"
   ],
   "author": "Slava Bereza <mail@betula.co> (http://betula.co)",
   "license": "MIT",

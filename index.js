@@ -1,12 +1,64 @@
 const
   { unsubscriber, collect, run } = require('unsubscriber'),
+  async_hooks = !global.fetch && require('async_hooks'),
 
   factory = () => {
+    let
+      zone_id = 0, // root zone
+      hook
+
     const
-      services = new Map(),
+      zone_index = new Map(),
+      zone_parent_index = new Map(),
+
+      zones = new Map(),
+
+      isolate = (fn) => {
+        if (!async_hooks) {
+          throw new Error('Isolate only possible on node environment')
+        }
+
+        if (!hook) {
+          hook = async_hooks.createHook({
+            init(async_id, _type, trigger_async_id) {
+              zone_index.set(async_id, zone_index.get(trigger_async_id))
+            },
+            before(async_id) {
+              zone_id = zone_index.get(async_id) || 0 // root zone
+            },
+            destroy(async_id) {
+              zone_index.delete(async_id)
+            },
+          }).enable()
+        }
+        return new Promise((resolve, reject) => {
+          process.nextTick(async () => {
+            zone_id = async_hooks.executionAsyncId()
+            zone_parent_index.set(zone_id, zone_index.get(zone_id) || 0) // root zone
+            zone_index.set(zone_id, zone_id)
+            try {
+              await fn()
+              resolve()
+            } catch (error) {
+              reject(error)
+            }
+            finally {
+              zone_parent_index.delete(zone_id)
+              destroy()
+            }
+          })
+        })
+      },
+
+      get_instances = () => {
+        if (!zones.has(zone_id)) {
+          zones.set(zone_id, new Map())
+        }
+        return zones.get(zone_id)
+      }
 
       provide = (ctor) => {
-        let h = services.get(ctor)
+        let h = get_instances().get(ctor)
         if (!h) {
           const unsubs = unsubscriber()
           try {
@@ -20,35 +72,42 @@ const
             ]
           } catch (e) {
             if (e.message === 'Maximum call stack size exceeded') {
-              console.error(e);
-              throw new Error('Circullar dependency detection');
+              throw new Error('Circullar dependency detection')
             } else {
-              throw e;
+              throw e
             }
           }
-          services.set(ctor, h)
+          get_instances().set(ctor, h)
         }
         return h[0]
       },
 
       destroy = function () {
-        const keys = new Set(
-          arguments.length > 0
-            ? arguments
-            : services.keys()
-        )
+        const
+          no_arguments = arguments.length === 0,
+          keys = new Set(
+            no_arguments
+              ? get_instances().keys()
+              : arguments
+          )
+
         for (let key of keys) {
-          const h = services.get(key)
+          const h = get_instances().get(key)
           if (h) {
-            services.delete(key)
+            get_instances().delete(key)
             run(h[1])
           }
+        }
+
+        if (no_arguments && zones.has(zone_id)) {
+          zones.delete(zone_id)
         }
       }
 
     return {
       provide,
-      destroy
+      destroy,
+      isolate
     }
   }
 

@@ -63,6 +63,19 @@ export const User => {
 }
 ```
 
+**Isolation of async scopes** (only in node environment)
+
+Run your app in isolated Service Provider scope. All instances cached for this instance application will be isolated from all cached instances in other scopes. No return value.
+
+```javascript
+import { isolate } from "provi/client"
+
+await isolate(async () => {
+  const app = new App(); // Run you app here
+  await app.run();
+  // ...
+});
+```
 
 
 Installation
