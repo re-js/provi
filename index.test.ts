@@ -3,7 +3,7 @@ import { factory } from 'provi'
 import * as client from 'provi/client'
 import * as server from 'provi/server'
 
-const { provide, destroy, isolate } = factory() as any
+const { provide, destroy, isolate } = factory()
 
 test('function service', () => {
   let c = 0
@@ -129,9 +129,15 @@ test('isolate', async () => {
     return i
   }
 
-  run_context(0)
-  run_context(1)
-  run_context(2)
+  run_context(0).then((r) => {
+    expect(r).toBe(0)
+  })
+  run_context(1).then((r) => {
+    expect(r).toBe(1)
+  })
+  run_context(2).then((r) => {
+    expect(r).toBe(2)
+  })
 
   await new Promise(r => setTimeout(r, 350))
 
@@ -141,7 +147,7 @@ test('isolate', async () => {
 
 
   async function run_context(i: number) {
-    await isolate(async () => {
+    const r = await isolate(async () => {
       expect(provide(A)).toBe(i)
 
       await new Promise(r => {
@@ -155,9 +161,12 @@ test('isolate', async () => {
       expect(provide(A)).toBe(i)
 
       expect(un_spy[i]).not.toBeCalled()
+
+      return i
     })
 
     expect(un_spy[i]).toBeCalled()
+    return r
   }
 
 })

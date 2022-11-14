@@ -9,5 +9,5 @@ type Destroy = {
 export declare const factory: () => {
   provide: Provide
   destroy: Destroy
-  isolate: (fn: () => Promise<void>) => void
+  isolate: <T>(fn: () => Promise<T>) => Promise<T>
 }

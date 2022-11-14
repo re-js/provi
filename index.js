@@ -40,10 +40,9 @@ const
             zone_parent_index.set(zone_id, zone_index.get(zone_id) || 0) // root zone
             zone_index.set(zone_id, zone_id)
             try {
-              await fn()
-              resolve()
-            } catch (error) {
-              reject(error)
+              resolve(await fn())
+            } catch (e) {
+              reject(e)
             }
             finally {
               zone_parent_index.delete(zone_id)

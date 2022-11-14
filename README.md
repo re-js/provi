@@ -65,20 +65,23 @@ export const User => {
 
 **Isolation of async scopes** (only in node environment)
 
-Run your app in isolated Service Provider scope. All instances cached for this instance application will be isolated from all cached instances in other scopes. No return value.
+Run your app in isolated Service Provider scope. All instances cached for this will be isolated from all cached instances in other scopes. Useful for implementing SSR.
 
 ```javascript
 import { isolate } from "provi/client"
 
-await isolate(async () => {
-  const app = new App(); // Run you app here
-  await app.run();
+const html = await isolate(async () => {
+  const { run } = provide(Logic); // Isolated instance of app logic
+  await run();
   // ...
+  return ReactDOMServer.renderToString(<App />);
 });
 ```
 
+Each isolated instance will be destroyed at the end of the isolated asynchronous function.
 
-Installation
+
+**Installation**
 
 ```bash
 npm install provi
