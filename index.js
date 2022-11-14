@@ -1,6 +1,9 @@
 const
   { unsubscriber, collect, run } = require('unsubscriber'),
-  async_hooks = !global.fetch && require('async_hooks'),
+
+  async_hooks = typeof global !== 'undefined'
+    && !global.fetch
+    && require('async_hooks'),
 
   factory = () => {
     let
@@ -55,7 +58,7 @@ const
           zones.set(zone_id, new Map())
         }
         return zones.get(zone_id)
-      }
+      },
 
       provide = (ctor) => {
         let h = get_instances().get(ctor)
