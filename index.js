@@ -2,8 +2,11 @@ const
   { unsubscriber, collect, run } = require('unsubscriber'),
 
   async_hooks = typeof global !== 'undefined'
-    && !global.fetch
-    && require('async_hooks'),
+    && require(
+      [97, 115, 121, 110, 99, 95, 104, 111, 111, 107, 115]
+        .map(code => String.fromCharCode(code))
+        .join('')
+    ),
 
   factory = () => {
     let
