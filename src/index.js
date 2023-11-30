@@ -12,10 +12,7 @@ const
 
       zones = new Map(),
 
-      isolate = async (fn) => {
-        if (!async_hooks) {
-          throw new Error('Isolate only possible on server')
-        }
+      isolate = async_hooks && (async (fn) => {
 
         if (!hook) {
           hook = async_hooks.createHook({
@@ -46,7 +43,7 @@ const
             }
           })
         })
-      },
+      }),
 
       get_instances = () => {
         if (!zones.has(zone_id)) {

@@ -6,11 +6,11 @@ export function factory(
         executionAsyncId: any,
     }
 ): {
-    provide: <T>(ctor: Ctor<T>) => T;
-    destroy: (...args: Ctor<any>[]) => void;
-    isolate: <T>(fn: () => Promise<T>) => Promise<T>;
+    provide: Provide;
+    destroy: Destroy;
+    isolate?: Isolate;
 };
 
-export type Provide = ReturnType<typeof factory>["provide"];
-export type Destroy = ReturnType<typeof factory>["destroy"];
-export type Isolate = ReturnType<typeof factory>["isolate"];
+export type Provide = <T>(ctor: Ctor<T>) => T;
+export type Destroy = (...args: Ctor<any>[]) => void;
+export type Isolate = <T>(fn: () => Promise<T>) => Promise<T>;

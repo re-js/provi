@@ -1,9 +1,8 @@
 import { factory } from 'provi';
 
-const { provide, destroy, isolate } = factory();
+const { provide, destroy } = factory();
 
 export {
   provide,
-  destroy,
-  isolate
+  destroy
 }

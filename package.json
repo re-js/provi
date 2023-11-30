@@ -3,14 +3,15 @@
   "version": "2.1.1",
   "description": "Minimalistic and cute Service Provider",
   "types": "src/index.d.ts",
-  "main": "dist/server.js",
+  "main": "dist/server.cjs",
   "module": "dist/server.module.js",
   "umd:main": "dist/server.umd.js",
   "source": "src/index.js",
   "scripts": {
     "test": "jest",
-    "build": "microbundle build --raw",
-    "dev": "microbundle watch --raw --format cjs"
+    "build": "yarn clean && microbundle build --raw --target node && microbundle build --raw --target web --cwd client && microbundle build --raw --target node --cwd server",
+    "dev": "microbundle watch --raw --format cjs",
+    "clean": "rm -rf client/dist server/dist dist"
   },
   "dependencies": {
     "unsubscriber": "2.x.x"

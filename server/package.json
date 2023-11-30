@@ -13,10 +13,6 @@
     "provi": "2.x.x"
   },
   "author": "Slava Bereza <mail@betula.co> (http://betula.co)",
-  "scripts": {
-    "build": "microbundle build --raw",
-    "dev": "microbundle watch --raw --format cjs"
-  },
   "exports": {
     ".": {
       "types": "./src/index.d.ts",
@@ -25,8 +21,5 @@
       "import": "./dist/server.mjs",
       "require": "./dist/server.js"
     }
-  },
-  "devDependencies": {
-    "microbundle": "0.15.1"
   }
 }

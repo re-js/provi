@@ -1,5 +1,5 @@
 import { factory } from 'provi';
-import asyncHooks from 'node:async_hooks';
+import asyncHooks from 'async_hooks';
 
 const { provide, destroy, isolate } = factory(asyncHooks);
 
