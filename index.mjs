@@ -1,13 +1,6 @@
+import { unsubscriber, collect, run }  from 'unsubscriber';
+
 const
-  { unsubscriber, collect, run } = require('unsubscriber'),
-
-  async_hooks = typeof global !== 'undefined'
-    && require(
-      [97, 115, 121, 110, 99, 95, 104, 111, 111, 107, 115]
-        .map(code => String.fromCharCode(code))
-        .join('')
-    ),
-
   factory = () => {
     let
       zone_id = 0, // root zone
@@ -19,10 +12,15 @@ const
 
       zones = new Map(),
 
-      isolate = (fn) => {
-        if (!async_hooks) {
+      isolate = async (fn) => {
+        const is_node = typeof global !== 'undefined'
+          && typeof process !== 'undefined' && process.env;
+
+        if (!is_node) {
           throw new Error('Isolate only possible on node environment')
         }
+
+        const async_hooks = await import('node:async_hooks');
 
         if (!hook) {
           hook = async_hooks.createHook({
@@ -116,6 +114,6 @@ const
     }
   }
 
-module.exports = {
+export {
   factory
 }

@@ -1,13 +1,14 @@
 {
   "name": "provi-client",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "description": "Service Provider for client side",
   "private": true,
   "license": "MIT",
-  "main": "index.js",
+  "type": "module",
+  "main": "index.mjs",
   "types": "index.d.ts",
   "peerDependencies": {
-    "provi": ">=0.9.0"
+    "provi": "2.x.x"
   },
   "author": "Slava Bereza <mail@betula.co> (http://betula.co)",
   "sideEffects": false
