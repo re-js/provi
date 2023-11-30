@@ -1,12 +1,22 @@
 {
   "name": "provi",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Minimalistic and cute Service Provider",
   "types": "src/index.d.ts",
-  "main": "dist/server.cjs",
-  "module": "dist/server.module.js",
-  "umd:main": "dist/server.umd.js",
+  "main": "dist/provi.js",
+  "module": "dist/provi.module.js",
+  "umd:main": "dist/provi.umd.js",
   "source": "src/index.js",
+  "files": [
+    "src",
+    "dist",
+    "client/dist",
+    "client/src",
+    "client/package.json",
+    "server/dist",
+    "server/src",
+    "server/package.json"
+  ],
   "scripts": {
     "test": "jest",
     "build": "yarn clean && microbundle build --raw --target node && microbundle build --raw --target web --cwd client && microbundle build --raw --target node --cwd server",
@@ -51,10 +61,24 @@
   "exports": {
     ".": {
       "types": "./src/index.d.ts",
-      "browser": "./dist/server.module.js",
-      "umd": "./dist/server.umd.js",
-      "import": "./dist/server.mjs",
-      "require": "./dist/server.js"
+      "browser": "./dist/provi.module.js",
+      "umd": "./dist/provi.umd.js",
+      "import": "./dist/provi.mjs",
+      "require": "./dist/provi.js"
+    },
+    "./client": {
+      "types": "./client/src/index.d.ts",
+      "browser": "./client/dist/client.module.js",
+      "umd": "./client/dist/client.umd.js",
+      "import": "./client/dist/client.mjs",
+      "require": "./client/dist/client.js"
+    },
+    "./server": {
+      "types": "./server/src/index.d.ts",
+      "browser": "./server/dist/server.module.js",
+      "umd": "./server/dist/server.umd.js",
+      "import": "./server/dist/server.mjs",
+      "require": "./server/dist/server.js"
     }
   }
 }
