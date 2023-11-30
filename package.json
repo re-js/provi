@@ -2,11 +2,15 @@
   "name": "provi",
   "version": "2.0.1",
   "description": "Minimalistic and cute Service Provider",
-  "type": "module",
-  "main": "index.mjs",
-  "types": "index.d.ts",
+  "types": "src/index.d.ts",
+  "main": "dist/server.js",
+  "module": "dist/server.module.js",
+  "umd:main": "dist/server.umd.js",
+  "source": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "microbundle build --raw",
+    "dev": "microbundle watch --raw --format cjs"
   },
   "dependencies": {
     "unsubscriber": "2.x.x"
@@ -40,6 +44,16 @@
     "@babel/preset-typescript": "7.23.3",
     "@types/jest": "29.5.10",
     "jest": "29.7.0",
-    "typescript": "5.3.2"
+    "typescript": "5.3.2",
+    "microbundle": "0.15.1"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "browser": "./dist/server.module.js",
+      "umd": "./dist/server.umd.js",
+      "import": "./dist/server.mjs",
+      "require": "./dist/server.js"
+    }
   }
 }

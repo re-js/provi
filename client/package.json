@@ -4,12 +4,29 @@
   "description": "Service Provider for client side",
   "private": true,
   "license": "MIT",
-  "type": "module",
-  "main": "index.mjs",
-  "types": "index.d.ts",
+  "types": "src/index.d.ts",
+  "main": "dist/client.js",
+  "module": "dist/client.module.js",
+  "umd:main": "dist/client.umd.js",
+  "source": "src/index.js",
   "peerDependencies": {
     "provi": "2.x.x"
   },
   "author": "Slava Bereza <mail@betula.co> (http://betula.co)",
-  "sideEffects": false
+  "scripts": {
+    "build": "microbundle build --raw",
+    "dev": "microbundle watch --raw --format cjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "browser": "./dist/server.module.js",
+      "umd": "./dist/server.umd.js",
+      "import": "./dist/server.mjs",
+      "require": "./dist/server.js"
+    }
+  },
+  "devDependencies": {
+    "microbundle": "0.15.1"
+  }
 }

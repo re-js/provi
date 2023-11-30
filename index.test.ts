@@ -1,9 +1,10 @@
 import { un } from 'unsubscriber'
-import { factory } from 'provi'
-import * as client from 'provi/client'
-import * as server from 'provi/server'
+import { factory } from './src'
+import * as client from './client/src'
+import * as server from './server/src'
 
-const { provide, destroy, isolate } = factory()
+import asyncHooks from 'node:async_hooks';
+const { provide, destroy, isolate } = factory(asyncHooks)
 
 test('function service', () => {
   let c = 0

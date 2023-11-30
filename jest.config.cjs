@@ -1,5 +1,6 @@
 module.exports = {
   transform: {
+    "^.+\\.js$": "babel-jest",
     "^.+\\.mjs$": "babel-jest",
     "^.+\\.ts$": "babel-jest",
   },
@@ -8,7 +9,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     "^provi$": "<rootDir>",
-    "^provi/client$": "<rootDir>/client",
-    "^provi/server$": "<rootDir>/server",
+    "^provi/client$": "<rootDir>/client/src",
+    "^provi/server$": "<rootDir>/server/src",
   }
 }
