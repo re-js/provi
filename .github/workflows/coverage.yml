@@ -22,9 +22,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: node --version
-      - run: npm --version
-      - run: npm i
-      - run: npm test -- --coverage
+      - run: yarn --version
+      - run: yarn
+      - run: yarn test --coverage
       - uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
