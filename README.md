@@ -68,7 +68,7 @@ export const User => {
 Run your app in isolated Service Provider scope. All instances cached for this will be isolated from all cached instances in other scopes. Useful for implementing SSR.
 
 ```javascript
-import { isolate } from "provi/client"
+import { isolate } from "provi/ssr"
 
 const html = await isolate(async () => {
   const { run } = provide(Logic); // Isolated instance of app logic
