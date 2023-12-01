@@ -1,14 +1,14 @@
 type Ctor<T> = (() => T) | (new () => T);
 
-export function factory(
-    asyncHooks?: {
-        createHook: any,
-        executionAsyncId: any,
-    }
-): {
+type AsyncHooks = {
+    createHook: any,
+    executionAsyncId: any,
+}
+
+export function factory(): {
     provide: Provide;
     destroy: Destroy;
-    isolate?: Isolate;
+    set_async_hooks: (asyncHooks: AsyncHooks) => Isolate;
 };
 
 export type Provide = <T>(ctor: Ctor<T>) => T;
