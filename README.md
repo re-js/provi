@@ -43,14 +43,16 @@ browser or native usage
 import { provide } from "provi/client"
 
 // Define dependencies using "provide" function
-export class Auth {
-  user = provide(User)
+class Auth {
+  // user = sharedUser()
   // ...
   logout() {
-    if (this.user.isAnonymous) return
+    if (sharedUser().isAnonymous) return
     // ...
   }
 }
+
+export const sharedAuth = () => provide(Auth)
 ```
 
 in both ways you can use plain javascript functions as dependency constructor
@@ -58,9 +60,16 @@ in both ways you can use plain javascript functions as dependency constructor
 ```javascript
 import { provide } from "provi/client"
 
-export const User => {
+const User = () => {
   // ...
+  return {
+    get isAnonymous() {
+      return true;
+    }
+  }
 }
+
+export const sharedUser = () => provide(User)
 ```
 
 **Isolation of async scopes** (only in node environment)
