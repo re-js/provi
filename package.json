@@ -1,6 +1,6 @@
 {
   "name": "provi",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "Minimalistic and cute Service Provider",
   "types": "src/index.d.ts",
   "main": "dist/provi.js",
