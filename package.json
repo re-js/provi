@@ -27,7 +27,7 @@
     "clean": "rm -rf client/dist server/dist dist"
   },
   "dependencies": {
-    "unsubscriber": "2.x.x"
+    "unsubscriber": ">=2.2.0 && <3.0.0"
   },
   "repository": {
     "type": "git",

@@ -4706,10 +4706,10 @@ universalify@^2.0.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.1.tgz#168efc2180964e6386d061e094df61afe239b18d"
   integrity sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==
 
-unsubscriber@2.x.x:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/unsubscriber/-/unsubscriber-2.1.0.tgz#0f0c83fc5f715c48d4c5ea53329d35f4bf8aea19"
-  integrity sha512-7bhQM5FL2+nzWof8kIK+G84lFlQ/heyifOBzX7ZFl66bdrjyfpr4QEoRDLIb/ykdg4wQiVMS8LmFIIXINQzaqQ==
+"unsubscriber@>=2.2.0 && <3.0.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/unsubscriber/-/unsubscriber-2.2.0.tgz#cdc8fe9351987d38f68afbc7363eede0c797d1ff"
+  integrity sha512-HFpU13+ShfP4i+KiCyehBloTFHYtOWF4E3t4p3ZVA+ImCBKsMgqPzpLVdQTtSGUhPgxdm/Rhyl/Yy+CEM6xHVA==
 
 update-browserslist-db@^1.0.13:
   version "1.0.13"
