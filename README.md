@@ -42,7 +42,6 @@ browser or native usage
 ```javascript
 import { provide } from "provi/client"
 
-// Define dependencies using "provide" function
 class Auth {
   // user = sharedUser()
   // ...
