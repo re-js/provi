@@ -1,10 +1,11 @@
 import { unsubscriber, collect, run }  from 'unsubscriber';
 
 const
-  factory = (async_hooks) => {
+  factory = () => {
     let
       zone_id = 0, // root zone
-      hook
+      hook,
+      async_hooks
 
     const
       zone_index = new Map(),
@@ -12,8 +13,12 @@ const
 
       zones = new Map(),
 
-      isolate = async_hooks && (async (fn) => {
+      set_async_hooks = (m) => {
+        async_hooks = m;
+        return isolate;
+      },
 
+      isolate = (async (fn) => {
         if (!hook) {
           hook = async_hooks.createHook({
             init(async_id, _type, trigger_async_id) {
@@ -102,7 +107,7 @@ const
     return {
       provide,
       destroy,
-      isolate
+      set_async_hooks
     }
   }
 

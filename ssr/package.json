@@ -1,0 +1,25 @@
+{
+  "name": "provi-ssr",
+  "version": "2.0.0",
+  "description": "SSR for Service Provider for client side",
+  "private": true,
+  "license": "MIT",
+  "types": "src/index.d.ts",
+  "main": "dist/ssr.js",
+  "module": "dist/ssr.module.js",
+  "umd:main": "dist/ssr.umd.js",
+  "source": "src/index.js",
+  "peerDependencies": {
+    "provi": "2.x.x"
+  },
+  "author": "Slava Bereza <mail@betula.co> (http://betula.co)",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "browser": "./dist/ssr.module.js",
+      "umd": "./dist/ssr.umd.js",
+      "import": "./dist/ssr.mjs",
+      "require": "./dist/ssr.js"
+    }
+  }
+}

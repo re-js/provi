@@ -15,11 +15,14 @@
     "client/package.json",
     "server/dist",
     "server/src",
-    "server/package.json"
+    "server/package.json",
+    "ssr/dist",
+    "ssr/src",
+    "ssr/package.json"
   ],
   "scripts": {
     "test": "jest",
-    "build": "yarn clean && microbundle build --raw --target node --generateTypes false && microbundle build --raw --target web --cwd client --generateTypes false && microbundle build --raw --target node --cwd server --generateTypes false",
+    "build": "yarn clean && microbundle build --raw --target node --generateTypes false && microbundle build --raw --target web --cwd client --generateTypes false && microbundle build --raw --target node --cwd server --generateTypes false && microbundle build --raw --target node --cwd ssr --generateTypes false",
     "dev": "microbundle watch --raw --format cjs",
     "clean": "rm -rf client/dist server/dist dist"
   },
@@ -72,6 +75,13 @@
       "umd": "./client/dist/client.umd.js",
       "import": "./client/dist/client.mjs",
       "require": "./client/dist/client.js"
+    },
+    "./ssr": {
+      "types": "./ssr/src/index.d.ts",
+      "browser": "./ssr/dist/ssr.module.js",
+      "umd": "./ssr/dist/ssr.umd.js",
+      "import": "./ssr/dist/ssr.mjs",
+      "require": "./ssr/dist/ssr.js"
     },
     "./server": {
       "types": "./server/src/index.d.ts",

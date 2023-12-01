@@ -1,8 +1,9 @@
 import { factory } from 'provi';
 
-const { provide, destroy } = factory();
+const { provide, destroy, set_async_hooks } = factory();
 
 export {
   provide,
-  destroy
+  destroy,
+  set_async_hooks
 }

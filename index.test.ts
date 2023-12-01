@@ -4,7 +4,8 @@ import * as client from './client/src'
 import * as server from './server/src'
 
 import asyncHooks from 'node:async_hooks';
-const { provide, destroy, isolate } = factory(asyncHooks)
+const { provide, destroy, set_async_hooks } = factory(asyncHooks) as any;
+const isolate = set_async_hooks(asyncHooks);
 
 test('function service', () => {
   let c = 0
